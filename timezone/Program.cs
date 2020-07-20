@@ -14,9 +14,11 @@ class TimeZoneDemo
             "output, which varies depending on the " +
             "time zone in which it is run.\n" );
 
-        // Get the local time zone and the current local time and year.
         TimeZone localZone = TimeZone.CurrentTimeZone;
-        DateTime currentDate = DateTime.Now;
+        DateTime currentDateHere = DateTime.Now;
+        var utc = DateTime.SpecifyKind(currentDateHere,DateTimeKind.Unspecified);
+        var timeZoneInfo = TimeZoneInfo.FindSystemTimeZoneById("Europe/Stockholm");
+        var currentDate = TimeZoneInfo.ConvertTimeToUtc(utc, timeZoneInfo);
         int      currentYear = currentDate.Year;
 
         // Display the names for standard time and daylight saving 
